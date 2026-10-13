@@ -47,7 +47,8 @@ Explain what shipped in a way the target user cares about, and save it as a read
 7. **Render the HTML.** Copy the template and replace the placeholders: `{{product_name}}`, `{{version}}`,
    `{{date}}` (today unless the user gives a release date), `{{intro}}`, `{{sections}}`. `{{sections}}` is one
    `<section>` per theme with an `<h2>` and a `<ul>` of `<li>` items, following the markup example in the template.
-   Escape `<`, `>` and `&` in text. Leave no `{{…}}` placeholder in the output.
+   Escape `<`, `>` and `&` in text. Delete the instructions comment at the top of the template. Leave no `{{…}}`
+   placeholder in the output.
 8. **Save** to `brain/products/<slug>/releases/<version>.html` (version in kebab-case, e.g. `2-4-0.html` or
    `sprint-42.html`). If the file exists, ask before overwriting; otherwise save as `<version>-v2.html`.
 9. **Show** a markdown preview of the content (intro + themes + items), then the list of **skipped items** with the
