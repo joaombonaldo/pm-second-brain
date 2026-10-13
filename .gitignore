@@ -1,0 +1,23 @@
+# Personal second brain: never committed to the shared repo (D4).
+# Leading slash = only the top-level brain/, so templates/brain/ IS committed.
+/brain/
+
+# Personal Devin CLI overrides (endpoints, tokens) — D17
+.devin/config.local.json
+.devin/mcp_config.local.json
+AGENTS.local.md
+
+# Secrets
+.env
+.env.*
+
+# OS / editor junk
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+.vscode/
+.idea/
+__pycache__/
+*.pyc
