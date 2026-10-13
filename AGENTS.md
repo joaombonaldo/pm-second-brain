@@ -91,8 +91,8 @@ ask. If there is only one, use it.
 
 ## Integrations
 
-Jira, Confluence and GitLab are reached through MCP servers configured in `.devin/config.json` /
-`.devin/config.local.json`. Whether they work from Devin CLI on a Dell laptop is still an open question (Q1 in
+Jira, Confluence and GitLab are reached through MCP servers configured in `.devin/mcp_config.json` (shared
+placeholders) and `.devin/mcp_config.local.json` (personal, git-ignored); see `.devin/README.md`. Whether they work from Devin CLI on a Dell laptop is still an open question (Q1 in
 `docs/HANDOFF.md`). If an MCP tool is missing or fails, say so plainly in one line and continue with the manual
 fallback the skill describes (pasted text, CSV export). Never fake an MCP result.
 

@@ -1,13 +1,8 @@
-// .devin/config.json — shared Devin CLI project config for pm-agents.
-// Committed to git: NO secrets, NO real endpoints here (D17 in docs/HANDOFF.md).
-// Put your real endpoints/tokens in .devin/config.local.json (git-ignored) or environment variables.
-//
-// UNVERIFIED: the exact schema must be checked against
-//   https://docs.devin.ai/cli/extensibility/configuration
-//   https://docs.devin.ai/cli/reference/configuration/config-file
-// As of 2026-10-13 those docs say that from Devin CLI v3000.3 project MCP servers live in
-// .devin/mcp_config.json (and .devin/mcp_config.local.json), and older versions read "mcpServers" from this file.
-// Once Q1 is answered, move the block below to whichever file your Devin CLI version reads.
+// .devin/config.json — shared Devin CLI project config for pm-agents (permissions only).
+// Committed to git: NO secrets here (D17 in docs/HANDOFF.md).
+// MCP servers live in .devin/mcp_config.json (shared placeholders) and .devin/mcp_config.local.json (yours, git-ignored),
+// per https://docs.devin.ai/cli/extensibility/mcp/configuration (Devin CLI v3000.3+).
+// Permission rule syntax: check https://docs.devin.ai/cli/extensibility/configuration if Devin rejects a rule.
 {
   "permissions": {
     // Reading files is always fine (the brain is plain markdown).
@@ -28,6 +23,7 @@
     ],
     // Always ask first: anything that changes shared repo files, any other shell command,
     // and every MCP call (Jira/Confluence/GitLab writes must be confirmed — D13).
+    // UNVERIFIED: whether the "mcp__*" pattern is accepted inside "ask".
     "ask": [
       "Write(AGENTS.md)",
       "Write(.agents/**)",
@@ -41,27 +37,5 @@
     ]
     // Writes inside brain/ use Devin's default (prompt in Normal mode). The skills themselves also ask before
     // durable writes to product/, roadmap/, decisions/ (see AGENTS.md).
-  },
-
-  // TODO(Q1 in docs/HANDOFF.md): confirm whether Dell's Jira, Confluence and GitLab MCP servers work from Devin CLI
-  // on a Dell laptop, and how to authenticate (SSO, personal token, env var). Replace the placeholders in your
-  // .devin/config.local.json, not here. Field names ("url", "transport") follow the Devin docs example for remote
-  // HTTP servers and are not yet verified against Dell's servers.
-  "mcpServers": {
-    "jira": {
-      // TODO(Q1): real URL goes in config.local.json
-      "url": "<DELL_JIRA_MCP_URL>",
-      "transport": "http"
-    },
-    "confluence": {
-      // TODO(Q1): real URL goes in config.local.json
-      "url": "<DELL_CONFLUENCE_MCP_URL>",
-      "transport": "http"
-    },
-    "gitlab": {
-      // TODO(Q1): real URL goes in config.local.json
-      "url": "<DELL_GITLAB_MCP_URL>",
-      "transport": "http"
-    }
   }
 }

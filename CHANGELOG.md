@@ -16,7 +16,8 @@ First build (MVP, D8/D9).
 - `CONVENTIONS.md`: claim types (D12), file naming, front matter per note type, links, citations, brain folder map.
 - `templates/`: meeting note, decision, stakeholder, user story, weekly status, persona, release-notes HTML, and the
   `templates/brain/` skeleton copied by `/onboard`.
-- `.devin/config.json` with conservative permissions and Jira/Confluence/GitLab MCP placeholders (D17, Q1 open).
+- `.devin/config.json` with conservative permissions; Jira/Confluence/GitLab MCP placeholders in
+  `.devin/mcp_config.json`, explained in `.devin/README.md` (D17, Q1 open).
 - `.gitignore` keeping the personal `brain/` and local config out of the repo (D4).
 - `evals/`: 10 manual scenarios and fictional fixtures (Acme Listings Optimizer).
 - `scripts/validate.py`: checks skill front matter, required templates, relative links and `.gitignore`.

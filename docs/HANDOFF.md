@@ -55,7 +55,7 @@ Status: ✅ decided · 🔁 superseded · ⏳ pending validation.
 | D14 | **Multiple products per PM:** `brain/products/<slug>/…`; `stakeholders/`, `preferences/`, `inbox/` are shared across products. `/onboard` can be re-run to add a product. | João's original ask mentioned "a product (or products)". | ✅ |
 | D15 | **No scheduler on a laptop:** weekly upkeep is a command the PM runs (Friday `/sweep`, once it exists). | Devin CLI has no built-in schedule; Devin web Automations could do it later if wanted. | ✅ |
 | D16 | Delivery of the first build: **zip with git history**; João pushes it to Dell GitLab himself. | The build environment cannot reach Dell's GitLab. Chosen by João on 2026-10-13. | ✅ |
-| D17 | MCP servers (Jira, Confluence, GitLab) are referenced in `.devin/config.json` as **placeholders**; real endpoints/auth go in `.devin/config.local.json` (git-ignored) or env vars. | Exact Dell endpoints and whether they work from the CLI are unknown (see Q1). No secrets in the shared repo. | ⏳ |
+| D17 | MCP servers (Jira, Confluence, GitLab) are **placeholders** in `.devin/mcp_config.json`; real endpoints/auth go in `.devin/mcp_config.local.json` (git-ignored) or env vars. `.devin/config.json` holds only permissions. | Exact Dell endpoints and whether they work from the CLI are unknown (see Q1). No secrets in the shared repo. Devin CLI v3000.3+ reads MCP servers from the dedicated `mcp_config*.json` files (https://docs.devin.ai/cli/extensibility/mcp/configuration). | ⏳ |
 
 ## 4. Open questions
 
@@ -80,7 +80,8 @@ Status: ✅ decided · 🔁 superseded · ⏳ pending validation.
   via `/name` (CLI) / `@skills:name` (web). Devin web indexes skills across all org-connected repos and runs one at a
   time. https://docs.devin.ai/product-guides/skills · https://docs.devin.ai/cli/extensibility/skills/overview
 - Devin CLI extensibility — rules, skills, plugins, custom subagents, MCP servers, hooks; project config in
-  `.devin/config.json`, personal overrides in `.devin/config.local.json` (git-ignored); also reads `.claude/`,
+  `.devin/config.json`, MCP servers in `.devin/mcp_config.json`, personal overrides in the `*.local.json` twins
+  (git-ignored); also reads `.claude/`,
   `.cursor/` config. https://docs.devin.ai/cli/extensibility · https://docs.devin.ai/cli/extensibility/configuration
 - Custom subagents (experimental) — `.devin/agents/<name>/AGENT.md`, own prompt, tools, model, permissions.
   https://docs.devin.ai/cli/subagents
@@ -122,7 +123,7 @@ pm-agents/
 ├── CONVENTIONS.md             # claim types, naming, front matter, linking, approval rules
 ├── CHANGELOG.md
 ├── .gitignore                 # ignores brain/ and local config
-├── .devin/config.json         # MCP placeholders + safe permissions (no secrets)
+├── .devin/                    # config.json (permissions), mcp_config.json (MCP placeholders), README.md
 ├── .agents/skills/
 │   ├── onboard/ ingest/ ask/              # Brain Keeper
 │   ├── user-story/                        # Backlog Writer
@@ -148,7 +149,7 @@ pm-agents/
    > marked ✅ unless I tell you otherwise. Ask me before committing. Next task: <describe it>.
 
 5. Immediate next steps after the first build:
-   - Answer Q1 (MCP from the CLI) and fill `.devin/config.local.json`.
+   - Answer Q1 (MCP from the CLI) and fill `.devin/mcp_config.local.json` (see `.devin/README.md`).
    - Merge João's real release-notes skill: move his steps into `.agents/skills/release-notes/SKILL.md` where they are
      team-generic, and his HTML template + persona into his `brain/preferences/`.
    - Replace the generic story template with Dell's format (Q7).

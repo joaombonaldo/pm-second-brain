@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "jira": {
+      "url": "<DELL_JIRA_MCP_URL>",
+      "transport": "http"
+    },
+    "confluence": {
+      "url": "<DELL_CONFLUENCE_MCP_URL>",
+      "transport": "http"
+    },
+    "gitlab": {
+      "url": "<DELL_GITLAB_MCP_URL>",
+      "transport": "http"
+    }
+  }
+}

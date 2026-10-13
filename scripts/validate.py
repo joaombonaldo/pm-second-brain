@@ -29,6 +29,7 @@ REQUIRED_FILES = [
     "CHANGELOG.md",
     ".gitignore",
     ".devin/config.json",
+    ".devin/mcp_config.json",
     "docs/HANDOFF.md",
     "templates/meeting-note.md",
     "templates/decision.md",
