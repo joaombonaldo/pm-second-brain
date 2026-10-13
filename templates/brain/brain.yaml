@@ -1,0 +1,28 @@
+# brain.yaml — your second brain's settings.
+# Created by /onboard. Lives in brain/ (git-ignored): it never reaches the shared repo.
+# Edit by hand any time, or re-run /onboard to add a product.
+
+# Who you are
+owner:
+  name: ""                  # e.g. Ana Souza
+  role: Product Manager
+
+# Your products (D14). Add one entry per product; /onboard does this for you.
+products: []
+#  - name: Listings Optimizer          # display name
+#    slug: listings-optimizer          # folder name: brain/products/<slug>/
+#    jira_keys: [LOPT]                 # Jira project key(s)
+#    confluence_spaces: [LOPT]         # Confluence space key(s) or URLs
+#    release_notes_persona: "Marketplace sellers who manage 50+ listings"
+#    # Full persona: brain/preferences/persona.md (overrides templates/persona.md)
+
+# Main stakeholders — details live in brain/stakeholders/<firstname-lastname>.md
+stakeholders: []
+#  - name: Marco Lima
+#    role: Engineering Manager
+#    file: stakeholders/marco-lima.md
+
+# Defaults used by skills
+defaults:
+  timezone: ""              # e.g. America/Sao_Paulo (used for weekly-status periods)
+  week_starts_on: monday

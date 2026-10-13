@@ -1,0 +1,205 @@
+WEBVTT
+
+1
+00:00:03.000 --> 00:00:10.556
+<v Ana Souza>Okay, let's start. Thanks both for joining. Today is about bulk editing for listing titles.</v>
+
+2
+00:00:11.356 --> 00:00:18.800
+<v Ana Souza>The goal is to agree on scope for version 2.4 so I can write the stories before planning.</v>
+
+3
+00:00:19.600 --> 00:00:25.322
+<v Marco Lima>Sounds good. I looked at the listing update API last week.</v>
+
+4
+00:00:26.122 --> 00:00:34.122
+<v Marco Lima>Updating titles one by one is fine, but a batch of a thousand would hit the marketplace rate limit.</v>
+
+5
+00:00:34.922 --> 00:00:40.256
+<v Priya Nair>How hard is the limit? Do we know the exact number?</v>
+
+6
+00:00:41.056 --> 00:00:48.667
+<v Marco Lima>Not exactly. The partner docs say around fifty requests per second, but I haven't tested it.</v>
+
+7
+00:00:49.467 --> 00:00:54.300
+<v Ana Souza>So we shouldn't promise unlimited batches.</v>
+
+8
+00:00:55.100 --> 00:00:59.822
+<v Marco Lima>Right. I'd cap it for the first release.</v>
+
+9
+00:01:00.622 --> 00:01:07.789
+<v Priya Nair>From the interviews, most sellers edit between twenty and eighty listings at a time.</v>
+
+10
+00:01:08.589 --> 00:01:15.033
+<v Priya Nair>Only two of the nine sellers we spoke to mentioned more than a hundred.</v>
+
+11
+00:01:15.833 --> 00:01:21.056
+<v Ana Souza>Then a cap of one hundred covers almost everyone.</v>
+
+12
+00:01:21.856 --> 00:01:27.411
+<v Marco Lima>One hundred is safe for the API too, even with retries.</v>
+
+13
+00:01:28.211 --> 00:01:35.822
+<v Ana Souza>Okay, decision: the first release of bulk edit is limited to one hundred listings per batch.</v>
+
+14
+00:01:36.622 --> 00:01:39.511
+<v Priya Nair>Agreed.</v>
+
+15
+00:01:40.311 --> 00:01:43.200
+<v Marco Lima>Agreed.</v>
+
+16
+00:01:44.000 --> 00:01:48.222
+<v Ana Souza>Next topic, how we roll it out.</v>
+
+17
+00:01:49.022 --> 00:01:56.356
+<v Marco Lima>I'd really prefer a feature flag. If titles get corrupted, we need to turn it off fast.</v>
+
+18
+00:01:57.156 --> 00:02:02.044
+<v Priya Nair>Can we start with a small group of sellers?</v>
+
+19
+00:02:02.844 --> 00:02:11.011
+<v Ana Souza>Yes. Let's ship bulk title edit in 2.4 behind a feature flag, enabled for the beta seller group first.</v>
+
+20
+00:02:11.811 --> 00:02:17.867
+<v Ana Souza>We open it to everyone once we've seen two weeks without errors.</v>
+
+21
+00:02:18.667 --> 00:02:21.889
+<v Marco Lima>Works for me.</v>
+
+22
+00:02:22.689 --> 00:02:25.800
+<v Priya Nair>Fine by me.</v>
+
+23
+00:02:26.600 --> 00:02:30.933
+<v Ana Souza>Good, that's our second decision.</v>
+
+24
+00:02:31.733 --> 00:02:37.567
+<v Priya Nair>On the design side, the current mockups don't show progress.</v>
+
+25
+00:02:38.367 --> 00:02:45.589
+<v Priya Nair>With a hundred listings it can take a while, so sellers need to see what's happening.</v>
+
+26
+00:02:46.389 --> 00:02:52.444
+<v Marco Lima>We can return progress per listing, so a progress bar is doable.</v>
+
+27
+00:02:53.244 --> 00:03:00.522
+<v Priya Nair>Then I'll add a progress indicator and a summary screen showing which listings failed.</v>
+
+28
+00:03:01.322 --> 00:03:05.933
+<v Ana Souza>When can you have the updated mockups?</v>
+
+29
+00:03:06.733 --> 00:03:10.789
+<v Priya Nair>By Thursday, October eighth.</v>
+
+30
+00:03:11.589 --> 00:03:16.867
+<v Ana Souza>Great. Marco, can you confirm the real rate limit?</v>
+
+31
+00:03:17.667 --> 00:03:24.889
+<v Marco Lima>I'll do a short spike against the sandbox and share numbers by Friday, October ninth.</v>
+
+32
+00:03:25.689 --> 00:03:31.578
+<v Ana Souza>Perfect. And I'll write the user stories for bulk title edit.</v>
+
+33
+00:03:32.378 --> 00:03:39.322
+<v Ana Souza>I'll share them with you both before sprint planning on Monday, October twelfth.</v>
+
+34
+00:03:40.122 --> 00:03:46.622
+<v Marco Lima>Honestly, I think sellers will ask for CSV upload more than this screen.</v>
+
+35
+00:03:47.422 --> 00:03:51.867
+<v Marco Lima>Power sellers live in spreadsheets.</v>
+
+36
+00:03:52.667 --> 00:03:59.000
+<v Priya Nair>Some do, but the interviews showed most of them edit inside the tool.</v>
+
+37
+00:03:59.800 --> 00:04:05.911
+<v Ana Souza>That's a fair point, but we only have Marco's view and the interviews so far.</v>
+
+38
+00:04:06.711 --> 00:04:11.656
+<v Ana Souza>I'll note CSV upload as a hypothesis we should test with sellers.</v>
+
+39
+00:04:12.456 --> 00:04:18.289
+<v Priya Nair>One thing we haven't settled. Should bulk edit support undo?</v>
+
+40
+00:04:19.089 --> 00:04:25.200
+<v Priya Nair>If a seller makes a typo across a hundred titles, that's painful.</v>
+
+41
+00:04:26.000 --> 00:04:31.833
+<v Marco Lima>Undo is not trivial. We'd need to store the previous titles.</v>
+
+42
+00:04:32.633 --> 00:04:39.244
+<v Ana Souza>Good question. I don't want to decide that today without knowing the cost.</v>
+
+43
+00:04:40.044 --> 00:04:44.378
+<v Marco Lima>I can't size it right now either.</v>
+
+44
+00:04:45.178 --> 00:04:49.344
+<v Ana Souza>Let's leave undo open for now.</v>
+
+45
+00:04:50.144 --> 00:04:52.922
+<v Priya Nair>Okay.</v>
+
+46
+00:04:53.722 --> 00:04:57.444
+<v Ana Souza>Anything else for 2.4?</v>
+
+47
+00:04:58.244 --> 00:05:04.078
+<v Marco Lima>No, that's all from me.</v>
+
+48
+00:05:04.878 --> 00:05:14.489
+<v Ana Souza>Fine. To recap: cap of one hundred, feature flag with beta sellers first, mockups Thursday, spike Friday, stories before Monday.</v>
+
+49
+00:05:15.289 --> 00:05:18.511
+<v Priya Nair>Sounds right.</v>
+
+50
+00:05:19.311 --> 00:05:22.478
+<v Marco Lima>Thanks, bye.</v>
+
+51
+00:05:23.278 --> 00:05:26.667
+<v Ana Souza>Thanks everyone.</v>

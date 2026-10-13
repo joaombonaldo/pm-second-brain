@@ -41,7 +41,8 @@ Explain what shipped in a way the target user cares about, and save it as a read
    theme first.
 5. **Write each item benefit-first** for the persona: what they can now do or what got better, then (briefly) how.
    One or two sentences. Plain words; no internal codenames or ticket jargon. Don't promise anything the story
-   doesn't say. Keep the Jira key in an HTML comment or small reference if the template supports it.
+   doesn't say. Keep the Jira key out of the visible text; put it in a `data-jira="KEY-123"` attribute on the `<li>` (as the
+   template example shows) so it stays traceable.
 6. **Write an intro**: 1–2 sentences, the headline of this release for the persona.
 7. **Render the HTML.** Copy the template and replace the placeholders: `{{product_name}}`, `{{version}}`,
    `{{date}}` (today unless the user gives a release date), `{{intro}}`, `{{sections}}`. `{{sections}}` is one

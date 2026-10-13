@@ -1,0 +1,23 @@
+# Fixture brain.yaml for evals — FICTIONAL product and people. Not Dell data.
+owner:
+  name: Ana Souza
+  role: Product Manager
+
+products:
+  - name: Acme Listings Optimizer
+    slug: acme-listings-optimizer
+    jira_keys: [ALO]
+    confluence_spaces: [ALO]
+    release_notes_persona: "Marketplace sellers who manage 50+ product listings and update them every week"
+
+stakeholders:
+  - name: Marco Lima
+    role: Engineering Manager
+    file: stakeholders/marco-lima.md
+  - name: Priya Nair
+    role: Product Designer
+    file: stakeholders/priya-nair.md
+
+defaults:
+  timezone: America/Sao_Paulo
+  week_starts_on: monday

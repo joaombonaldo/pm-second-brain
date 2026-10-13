@@ -1,0 +1,9 @@
+Issue key,Summary,Issue Type,Status,Labels,Fix Version,Description
+ALO-101,Bulk edit listing titles (up to 100 per batch),Story,Done,bulk-edit,2.4.0,"Sellers can select up to 100 listings and replace or append text in their titles in one action."
+ALO-102,Show progress while a bulk edit runs,Story,Done,bulk-edit,2.4.0,"Progress bar with count of listings updated; seller can leave the page and come back."
+ALO-103,Summary screen listing failed updates after bulk edit,Story,Done,bulk-edit,2.4.0,"After a batch, show which listings failed and why, with a retry button for failed ones."
+ALO-104,Feature flag for bulk title edit (beta sellers),Story,Done,"internal,feature-flag",2.4.0,"Add flag bulk_title_edit; enable for beta seller group only."
+ALO-105,Title length warning before saving,Story,Done,quality,2.4.0,"Warn when a title exceeds the marketplace's 150-character limit before the seller saves."
+ALO-106,Fix: search filter reset when returning from listing details,Bug,Done,search,2.4.0,"Filters on the listings page were lost after opening a listing and pressing back."
+ALO-107,Upgrade HTTP client library to v5,Task,Done,tech-debt,2.4.0,"Dependency upgrade; no behaviour change."
+ALO-108,Export optimization suggestions to CSV,Story,Done,suggestions,2.4.0,"Sellers can download all title and description suggestions for selected listings as a CSV file."
