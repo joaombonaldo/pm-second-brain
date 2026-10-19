@@ -1,6 +1,17 @@
 ---
 name: decision
 description: Log a product decision straight from the chat in one step, check whether it replaces an older decision, and offer to mark the old one as superseded. Use when the user types /decision, or says "log a decision", "we decided…", "record that we chose…", "Ana decided today that…", "note this decision".
+metadata:
+  category: brain
+  role: Brain Keeper
+  owner: pm-agents core
+  version: "0.2.0"
+  status: experimental
+  brain: required
+  reads: "brain/brain.yaml, brain/preferences/, brain/products/<slug>/decisions/, brain/products/<slug>/topics/, brain/products/<slug>/index.md"
+  writes: "brain/products/<slug>/decisions/, brain/products/<slug>/topics/, brain/products/<slug>/index.md"
+  preferences: "decision.md"
+  requires: "python3, git"
 ---
 
 # /decision — Brain Keeper

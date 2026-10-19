@@ -1,6 +1,17 @@
 ---
 name: ingest
 description: Process meeting transcripts and notes into the second brain, all inbox files in one batch with a single approval at the end. Use when the user types /ingest, drops files into brain/inbox/ (.vtt, .docx, .txt, .md), pastes meeting notes or a transcript, or says "process my meeting", "file this transcript", "add these notes to the brain".
+metadata:
+  category: brain
+  role: Brain Keeper
+  owner: pm-agents core
+  version: "0.2.0"
+  status: stable
+  brain: required
+  reads: "brain/brain.yaml, brain/preferences/, brain/inbox/, brain/stakeholders/, brain/products/<slug>/product/, brain/products/<slug>/decisions/, brain/products/<slug>/topics/, brain/products/<slug>/index.md"
+  writes: "brain/products/<slug>/meetings/, brain/stakeholders/, brain/products/<slug>/topics/, brain/products/<slug>/index.md, brain/inbox/processed/, brain/products/<slug>/decisions/, brain/products/<slug>/product/, brain/products/<slug>/roadmap/, brain/products/<slug>/hypotheses/"
+  preferences: "README.md, meeting-note.md"
+  requires: "python3, git"
 ---
 
 # /ingest — Brain Keeper

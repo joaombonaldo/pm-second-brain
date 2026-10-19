@@ -1,6 +1,17 @@
 ---
 name: ask
 description: Answer questions about the PM's product, people, decisions, meetings and plans using only what is in the second brain, with citations; for team questions, also search the team hub. Use when the user types /ask, or asks "what did we decide about…", "who owns…", "when did…", "what do we know about…", "what did we believe in August…", "remind me…", "what is the team doing on…". Read-only.
+metadata:
+  category: brain
+  role: Brain Keeper
+  owner: pm-agents core
+  version: "0.2.0"
+  status: stable
+  brain: required
+  reads: "brain/, <team_hub.path>/digests/, <team_hub.path>/products/, jira, confluence"
+  writes: ""
+  preferences: ""
+  requires: "python3, team-hub, jira-mcp, confluence-mcp"
 ---
 
 # /ask — Brain Keeper

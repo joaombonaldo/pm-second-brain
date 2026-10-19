@@ -1,6 +1,17 @@
 ---
 name: connect-dots
 description: Look across the team hub's recent digests and product cards to find where PMs could work together - overlaps (two people building the same thing), reuse (one person's reusable asset matches another's need), combinations (two pieces that together enable something new) and dependencies or risks between teams - each with evidence, confidence and a next step. Use when the user types /connect-dots, or says "connect the dots", "find overlaps", "who could reuse what", "what could we build together", "are two people doing the same thing". Primary user is the manager; any PM can run it. Reads only the hub.
+metadata:
+  category: team
+  role: Connector
+  owner: pm-agents core
+  version: "0.2.0"
+  status: experimental
+  brain: required
+  reads: "brain/brain.yaml, <team_hub.path>/digests/, <team_hub.path>/products/, <team_hub.path>/members/, <team_hub.path>/connections/"
+  writes: "brain/products/<slug>/research/ (after yes), <team_hub.path>/connections/ (after yes)"
+  preferences: ""
+  requires: "python3, team-hub, git"
 ---
 
 # /connect-dots — Connector

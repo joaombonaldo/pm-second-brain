@@ -91,6 +91,15 @@ Answers come with the file and date they came from. If the brain doesn't know, i
 
 You can also just ask in plain words ("write release notes for sprint 42") and the right skill is picked.
 
+## Skills marketplace
+
+Every skill the team can use is listed in [CATALOG.md](CATALOG.md), grouped by category, with its status
+(`stable` or `experimental`), owner and what it needs. Every skill reads your `brain/brain.yaml` and
+`brain/preferences/`, so it works on your product unchanged. Ask "what can you do?" in Devin for a quick tour.
+
+Built a useful workflow? Turn it into a skill for everyone: [CONTRIBUTING.md](CONTRIBUTING.md) explains how
+(template, one eval scenario, `python3 scripts/validate.py`, merge request).
+
 ## Weekly rhythm
 
 - **Every day:** drop transcripts in `brain/inbox/` → `/ingest`.
@@ -163,5 +172,7 @@ See `brain/preferences/README.md` after onboarding.
 - [docs/HANDOFF.md](docs/HANDOFF.md): why things are the way they are, decisions and open questions.
 - [docs/DESIGN-v0.2.md](docs/DESIGN-v0.2.md): the team layer and memory upgrades in detail.
 - [AGENTS.md](AGENTS.md): the rules every agent follows.
+- [CATALOG.md](CATALOG.md) and [CONTRIBUTING.md](CONTRIBUTING.md): browse and add skills;
+  [docs/SKILL-STANDARD.md](docs/SKILL-STANDARD.md): the brain contract every skill follows.
 - [CONVENTIONS.md](CONVENTIONS.md): how notes in the brain are named and structured.
 - [evals/README.md](evals/README.md): how to test the skills.

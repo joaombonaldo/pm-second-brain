@@ -1,6 +1,17 @@
 ---
 name: onboard
 description: Set up the PM's second brain (the brain/ folder) for the first time, add another product to an existing brain, or connect the brain to the team hub later. Use when the user types /onboard, says "set me up", "get started", "add a product", "connect me to the team hub", or when any other skill finds that brain/brain.yaml does not exist.
+metadata:
+  category: brain
+  role: Brain Keeper
+  owner: pm-agents core
+  version: "0.2.0"
+  status: stable
+  brain: optional
+  reads: "brain/brain.yaml, templates/brain/, templates/stakeholder.md, templates/persona.md, templates/product-index.md, templates/team-hub/member.md, <team_hub.path>/members/"
+  writes: "brain/ (skeleton), brain/brain.yaml, brain/preferences/persona.md, brain/stakeholders/, brain/products/<slug>/product/overview.md, brain/products/<slug>/index.md, <team_hub.path>/members/<person-slug>.md"
+  preferences: "persona.md"
+  requires: "team-hub, git"
 ---
 
 # /onboard — Brain Keeper

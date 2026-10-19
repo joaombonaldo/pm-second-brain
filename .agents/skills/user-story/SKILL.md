@@ -1,6 +1,17 @@
 ---
 name: user-story
 description: Turn an idea, decision, meeting note or request into well-formed user stories with Given/When/Then acceptance criteria, saved as drafts in the brain, and optionally created in Jira after explicit confirmation. Use when the user types /user-story, or says "write a story for…", "turn this into tickets", "create Jira issues for…", "break this down into stories".
+metadata:
+  category: backlog
+  role: Backlog Writer
+  owner: pm-agents core
+  version: "0.2.0"
+  status: stable
+  brain: required
+  reads: "brain/brain.yaml, brain/preferences/, brain/products/<slug>/decisions/, brain/products/<slug>/meetings/, brain/products/<slug>/research/, brain/products/<slug>/product/, brain/products/<slug>/backlog/drafts/"
+  writes: "brain/products/<slug>/backlog/drafts/, jira (after yes)"
+  preferences: "README.md, user-story.md, persona.md"
+  requires: "jira-mcp, git"
 ---
 
 # /user-story — Backlog Writer

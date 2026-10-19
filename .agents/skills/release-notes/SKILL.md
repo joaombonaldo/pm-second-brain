@@ -1,6 +1,17 @@
 ---
 name: release-notes
 description: Draft user-facing release notes for a sprint or version as an HTML page, written benefit-first for the PM's persona, from the done stories in Jira or a pasted list/CSV. Use when the user types /release-notes, or says "release notes for sprint/version…", "what shipped in…", "write the changelog for users".
+metadata:
+  category: release
+  role: Release Manager
+  owner: pm-agents core
+  version: "0.2.0"
+  status: stable
+  brain: required
+  reads: "brain/brain.yaml, brain/preferences/, brain/products/<slug>/product/, jira"
+  writes: "brain/products/<slug>/releases/"
+  preferences: "README.md, persona.md, release-notes.html"
+  requires: "jira-mcp, git"
 ---
 
 # /release-notes — Release Manager

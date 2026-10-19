@@ -1,6 +1,17 @@
 ---
 name: publish
 description: Write the PM's weekly digest and product card update from the second brain, run the privacy check, show the exact text, and after an explicit yes commit and push it to the shared team hub (pm-team-hub). Use when the user types /publish, or says "publish my week", "send my digest to the team hub", "update my product card", "share this week with the team". Usually run on Friday after /sweep.
+metadata:
+  category: team
+  role: Reporter
+  owner: pm-agents core
+  version: "0.2.0"
+  status: experimental
+  brain: required
+  reads: "brain/brain.yaml, brain/preferences/, brain/products/<slug>/, <team_hub.path>/digests/, <team_hub.path>/products/, <team_hub.path>/members/"
+  writes: "<team_hub.path>/digests/, <team_hub.path>/products/, <team_hub.path>/members/"
+  preferences: "digest.md, product-card.md"
+  requires: "python3, team-hub, git"
 ---
 
 # /publish — Reporter

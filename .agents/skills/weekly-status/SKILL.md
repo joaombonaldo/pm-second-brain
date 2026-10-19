@@ -1,6 +1,17 @@
 ---
 name: weekly-status
 description: Draft the PM's weekly status report from the last 7 days of meetings, decisions and notes in the second brain (plus Jira progress if available), with a short paste-ready version for Teams or email. Use when the user types /weekly-status, or says "weekly status", "update for my manager", "what happened this week", "status report".
+metadata:
+  category: reporting
+  role: Reporter
+  owner: pm-agents core
+  version: "0.2.0"
+  status: stable
+  brain: required
+  reads: "brain/brain.yaml, brain/preferences/, brain/products/<slug>/meetings/, brain/products/<slug>/decisions/, brain/products/<slug>/backlog/, brain/products/<slug>/releases/, brain/products/<slug>/status/, brain/stakeholders/, jira"
+  writes: "brain/products/<slug>/status/"
+  preferences: "README.md, weekly-status.md"
+  requires: "jira-mcp, git"
 ---
 
 # /weekly-status — Reporter

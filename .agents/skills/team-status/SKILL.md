@@ -1,6 +1,17 @@
 ---
 name: team-status
-description: Roll up the team's weekly digests from the shared team hub (pm-team-hub) into one short portfolio view: each person's headline and products, cross-team risks, open asks grouped by who could help, and who hasn't published. Use when the user types /team-status, or says "team status", "portfolio roll-up", "how is the team doing this week", "what did everyone publish", "who hasn't published". Primary user is the manager; any PM can run it. Reads only the hub.
+description: Roll up the team's weekly digests from the shared team hub (pm-team-hub) into one short portfolio view - each person's headline and products, cross-team risks, open asks grouped by who could help, and who hasn't published. Use when the user types /team-status, or says "team status", "portfolio roll-up", "how is the team doing this week", "what did everyone publish", "who hasn't published". Primary user is the manager; any PM can run it. Reads only the hub.
+metadata:
+  category: team
+  role: Reporter
+  owner: pm-agents core
+  version: "0.2.0"
+  status: experimental
+  brain: required
+  reads: "brain/brain.yaml, <team_hub.path>/digests/, <team_hub.path>/members/, <team_hub.path>/products/"
+  writes: "brain/products/<slug>/status/ (after yes)"
+  preferences: ""
+  requires: "python3, team-hub, git"
 ---
 
 # /team-status — Reporter (shared with Connector)

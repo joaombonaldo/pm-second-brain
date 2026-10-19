@@ -1,6 +1,17 @@
 ---
 name: sweep
 description: Weekly "dreaming" pass that tidies the second brain - merges duplicate notes, marks contradicted decisions as superseded, flags stale notes, promotes repeated observations to product pages, rebuilds topic hubs and the product index, and writes a sweep report. Use when the user types /sweep, says "tidy my brain", "clean up the brain", "weekly upkeep", or on Fridays before /publish.
+metadata:
+  category: brain
+  role: Brain Keeper
+  owner: pm-agents core
+  version: "0.2.0"
+  status: experimental
+  brain: required
+  reads: "brain/brain.yaml, brain/products/<slug>/, brain/stakeholders/, brain/products/<slug>/sweeps/"
+  writes: "brain/products/<slug>/meetings/, brain/products/<slug>/decisions/, brain/products/<slug>/product/, brain/products/<slug>/topics/, brain/products/<slug>/index.md, brain/products/<slug>/sweeps/"
+  preferences: ""
+  requires: "python3, git"
 ---
 
 # /sweep — Brain Keeper

@@ -57,6 +57,11 @@ Manager, Monday: `/team-status`, then `/connect-dots`.
 If a request fits no skill, answer normally but still follow the brain rules below.
 If it fits two, ask one short question to choose.
 
+**Skills marketplace (v0.3).** `CATALOG.md` lists every skill with category, status and owner; it is the source of
+truth over the tables above. When the user asks "what can you do?", show the categories from `CATALOG.md` with one
+line per skill, and mark `experimental` ones. When a request matches no skill, suggest the closest one, or offer to
+help propose a new skill via `CONTRIBUTING.md`. Every skill follows the brain contract in `docs/SKILL-STANDARD.md`.
+
 ## Brain rules
 
 1. **Read before answering.** Search first with `python3 scripts/brain_search.py "<words>" [--type --topic --person
