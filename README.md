@@ -176,3 +176,7 @@ See `brain/preferences/README.md` after onboarding.
   [docs/SKILL-STANDARD.md](docs/SKILL-STANDARD.md): the brain contract every skill follows.
 - [CONVENTIONS.md](CONVENTIONS.md): how notes in the brain are named and structured.
 - [evals/README.md](evals/README.md): how to test the skills.
+
+## Presentation
+
+An 8-slide overview for managers and colleagues (with speaker notes): [docs/presentation/pm-second-brain-overview.pptx](docs/presentation/pm-second-brain-overview.pptx).
