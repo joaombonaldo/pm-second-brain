@@ -8,7 +8,8 @@ You clone this folder, open it with Devin CLI, and talk to it. Your notes stay o
 - **Brain Keeper** remembers meetings, decisions and people, and answers questions from that memory.
 - **Backlog Writer** turns ideas and decisions into user stories.
 - **Release Manager** writes release notes for your users.
-- **Reporter** drafts your weekly status.
+- **Reporter** drafts your weekly status and publishes a short weekly digest to the team hub.
+- **Connector** looks across the team's digests for overlaps, reuse and things you could build together.
 
 ## Quick start (about 15 minutes)
 
@@ -37,8 +38,9 @@ In Devin, type:
 /onboard
 ```
 
-It asks you up to 6 short questions (your name, your product, Jira key, Confluence space, main stakeholders, who you
-write release notes for) and creates your personal `brain/` folder. `brain/` is never pushed to the shared repo.
+It asks you up to 7 short questions (your name, PM or manager, your product, Jira key and Confluence space, main
+stakeholders, who you write release notes for, and optionally where your team hub is) and creates your personal
+`brain/` folder. `brain/` is never pushed to the shared repo; it keeps its own private version history.
 
 Have a second product? Run `/onboard` again later to add it.
 
@@ -75,14 +77,59 @@ Answers come with the file and date they came from. If the brain doesn't know, i
 
 | Command | What it does | Who |
 |---------|--------------|-----|
-| `/onboard` | Create your brain, or add another product | Brain Keeper |
-| `/ingest` | Turn transcripts and notes in `brain/inbox/` into meeting notes | Brain Keeper |
-| `/ask <question>` | Answer from your brain, with sources | Brain Keeper |
+| `/onboard` | Create your brain, add another product, or connect the team hub | Brain Keeper |
+| `/ingest` | Turn every file in `brain/inbox/` into meeting notes; one approval at the end | Brain Keeper |
+| `/ask <question>` | Answer from your brain (and the team hub for team questions), with sources | Brain Keeper |
+| `/decision <what>` | Log a decision from chat; offers to mark an older conflicting one as replaced | Brain Keeper |
+| `/sweep` | Weekly tidy-up: duplicates, contradictions, stale notes, topic pages | Brain Keeper |
 | `/user-story <idea>` | Draft user stories; create Jira issues only after you confirm | Backlog Writer |
 | `/release-notes <version>` | Draft release notes as an HTML page | Release Manager |
 | `/weekly-status` | Draft this week's status plus a short paste-ready version | Reporter |
+| `/publish` | Write your weekly digest + product card; you approve the exact text before it reaches the hub | Reporter |
+| `/team-status` | One-screen roll-up of everyone's digests, risks, asks, who hasn't published | Reporter / Connector |
+| `/connect-dots` | Find overlaps, reuse and joint opportunities across the team, with evidence | Connector |
 
 You can also just ask in plain words ("write release notes for sprint 42") and the right skill is picked.
+
+## Weekly rhythm
+
+- **Every day:** drop transcripts in `brain/inbox/` → `/ingest`.
+- **Friday:** `/sweep` → approve → `/publish` → approve.
+- **Monday (manager):** `/team-status`, then `/connect-dots`.
+
+## Team hub setup
+
+The team hub is a small shared GitLab repo, `pm-team-hub`, where each person publishes **one short digest a week**
+and keeps **one card per product**. It never holds brain files: your notes stay private.
+
+1. **One person creates it** (usually the manager): make an empty GitLab repo `pm-team-hub`, copy everything from
+   `templates/team-hub/` in this repo into it, commit and push. Give every PM read and write access.
+2. **Everyone clones it next to `pm-agents`**, so the two folders sit side by side:
+
+   ```bash
+   cd <the folder that contains pm-agents>
+   git clone <pm-team-hub GitLab URL>
+   ```
+
+3. **Connect it:** in `pm-agents`, run `/onboard` and choose "set up the team hub". Give the path (usually
+   `../pm-team-hub`) and your person slug (e.g. `ana-souza`).
+
+No hub yet? Everything else works; team commands just tell you they're off.
+
+**What gets shared.** Only what you approve in `/publish`: a summary of your work, shareable decisions, asks.
+Never transcripts, people notes, colleagues' opinions or anything marked `share: private`. You see the exact text
+first, and pushing asks again.
+
+## For managers
+
+Same repo, same install. During `/onboard`, answer **manager** when asked for your role. You get your own private
+brain (your work, 1:1 notes, team goals), and on Mondays:
+
+- `/team-status`: everyone's headline, cross-team risks, open asks with who could help, who hasn't published.
+- `/connect-dots`: overlaps (two people building the same thing), reuse (one person's asset matches another's
+  need), combinations and dependencies, each with the digest it comes from and a confidence level.
+
+Both read only the hub, never anyone's brain. Publishing your own digest (e.g. team priorities) is optional.
 
 ## Updating
 
@@ -95,15 +142,13 @@ Your `brain/` folder is not touched by updates.
 
 ## Backing up your brain (optional)
 
-`brain/` lives only on your laptop. To back it up, make it its own private git repo:
+`brain/` lives only on your laptop. `/onboard` makes it its own small git repo, and every command that changes it
+saves a commit, so you can undo (`git -C brain log --oneline`). To back it up, add a private remote by hand:
 
 ```bash
 cd brain
-git init
-git add .
-git commit -m "Brain backup"
 git remote add origin <your private personal GitLab project URL>
-git push -u origin main
+git push -u origin HEAD
 ```
 
 Keep that project **private**. Check your team's data rules first (Q3 in [docs/HANDOFF.md](docs/HANDOFF.md)).
@@ -116,6 +161,7 @@ See `brain/preferences/README.md` after onboarding.
 ## Read more
 
 - [docs/HANDOFF.md](docs/HANDOFF.md): why things are the way they are, decisions and open questions.
+- [docs/DESIGN-v0.2.md](docs/DESIGN-v0.2.md): the team layer and memory upgrades in detail.
 - [AGENTS.md](AGENTS.md): the rules every agent follows.
 - [CONVENTIONS.md](CONVENTIONS.md): how notes in the brain are named and structured.
 - [evals/README.md](evals/README.md): how to test the skills.

@@ -6,7 +6,8 @@ Checks:
      and a non-empty `description` of at most 1024 characters.
   2. Required templates exist.
   3. Relative markdown links in repo .md files resolve (http(s)/mailto links, anchor-only links,
-     links inside code, and files under templates/brain/ are ignored).
+     links inside code, and files under templates/brain/ and templates/team-hub/ are ignored: their
+     links are relative to the future brain/ or pm-team-hub/ they get copied into).
   4. .gitignore ignores the top-level brain folder with `/brain/`.
 
 Usage:  python3 scripts/validate.py
@@ -31,6 +32,8 @@ REQUIRED_FILES = [
     ".devin/config.json",
     ".devin/mcp_config.json",
     "docs/HANDOFF.md",
+    "docs/DESIGN-v0.2.md",
+    "scripts/brain_search.py",
     "templates/meeting-note.md",
     "templates/decision.md",
     "templates/stakeholder.md",
@@ -38,6 +41,12 @@ REQUIRED_FILES = [
     "templates/weekly-status.md",
     "templates/release-notes.html",
     "templates/persona.md",
+    "templates/topic-hub.md",
+    "templates/product-index.md",
+    "templates/digest.md",
+    "templates/product-card.md",
+    "templates/team-hub/README.md",
+    "templates/team-hub/member.md",
     "templates/brain/brain.yaml",
     "templates/brain/preferences/README.md",
     "templates/brain/inbox/.gitkeep",
@@ -46,7 +55,13 @@ REQUIRED_FILES = [
     "templates/brain/products/_example/README.md",
 ]
 
-EXPECTED_SKILLS = ["onboard", "ingest", "ask", "user-story", "release-notes", "weekly-status"]
+EXPECTED_SKILLS = [
+    "onboard", "ingest", "ask", "decision", "sweep",   # Brain Keeper
+    "user-story",                                      # Backlog Writer
+    "release-notes",                                   # Release Manager
+    "weekly-status", "publish",                        # Reporter
+    "team-status", "connect-dots",                     # Connector (team-status shared with Reporter)
+]
 HTML_PLACEHOLDERS = ["{{product_name}}", "{{version}}", "{{date}}", "{{intro}}", "{{sections}}"]
 
 SKIP_DIRS = {".git", "brain", "node_modules", "__pycache__"}
@@ -145,8 +160,8 @@ def iter_markdown_files():
         parts = path.relative_to(ROOT).parts
         if parts[0] in SKIP_DIRS or any(p in {".git", "node_modules", "__pycache__"} for p in parts):
             continue  # .git/, the personal top-level brain/, caches
-        if parts[:2] == ("templates", "brain"):
-            continue
+        if parts[:2] in {("templates", "brain"), ("templates", "team-hub")}:
+            continue  # links are relative to the brain/ or pm-team-hub/ these get copied into
         yield path
 
 

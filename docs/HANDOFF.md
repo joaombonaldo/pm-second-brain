@@ -4,7 +4,7 @@
 > continued by any person or agent (Claude Code, Devin, another chat) without the original conversation.
 >
 > Owner: João Miguel Bonaldo Meier (Product Manager 2, Dell Technologies)
-> Started: 2026-10-13 · Last updated: 2026-10-13
+> Started: 2026-10-13 · Last updated: 2026-10-19 (v0.2: team layer + memory upgrades — spec in `docs/DESIGN-v0.2.md`)
 > Living plan (with diagrams): https://claude.ai/code/artifact/7ab8e89c-86b6-4ce0-ba26-644b5a7c49b7
 
 ---
@@ -45,9 +45,9 @@ Status: ✅ decided · 🔁 superseded · ⏳ pending validation.
 | D4 | **One repo, `pm-agents`.** Shared skills/agents/templates are committed; each PM's knowledge lives in a **git-ignored `brain/` folder** inside the clone. | Simplest possible onboarding (one clone), updates via `git pull`, personal data never reaches the shared repo. A PM may make `brain/` its own git repo and push it to a private personal GitLab project as backup. | ✅ |
 | D5 | Skills live in **`.agents/skills/<name>/SKILL.md`** (open Agent Skills standard). | Read by Devin CLI *and* the Devin web app, and by other agents (Claude Code, Cursor, etc.). Chosen by João on 2026-10-13. | ✅ |
 | D6 | **Shared procedure, personal style.** A skill holds the team-default steps; each PM's persona, tone and templates live in `brain/preferences/` and override `templates/`. | This is how João's personal release-notes skill becomes reusable for 25 people without losing his style. | ✅ |
-| D7 | **Four agent roles**, routed by `AGENTS.md`: Brain Keeper, Backlog Writer, Release Manager, Reporter. | Matches a PM's week: remember → write backlog → ship → report. One entry point; the router picks the role. | ✅ |
+| D7 | **Four agent roles**, routed by `AGENTS.md`: Brain Keeper, Backlog Writer, Release Manager, Reporter. | Matches a PM's week: remember → write backlog → ship → report. One entry point; the router picks the role. | 🔁 v0.2 adds a fifth role, **Connector** (`/team-status`, `/connect-dots`); `/publish` joins Reporter (D18–D23) |
 | D8 | **MVP = skills only; no custom subagents yet.** Subagent profiles (`.devin/agents/<name>/AGENT.md`) come later, only where isolation pays (e.g. digesting a 1-hour transcript, a read-only Reporter). | Custom subagents are experimental in Devin CLI and cost extra credits. Chosen by João: "MVP only". | ✅ |
-| D9 | **MVP skills (6):** `onboard`, `ingest`, `ask`, `user-story`, `release-notes`, `weekly-status`. Next: `decision`, `sweep` (pilot week 2), then `refine`, `sprint-summary`, `exec-update`, `meeting-prep`, `prd`, `roadmap-review`, `publish`. | Smallest set that covers capture, recall, backlog, shipping and reporting. A new skill is added after the same manual request has been typed three times. | ✅ |
+| D9 | **MVP skills (6):** `onboard`, `ingest`, `ask`, `user-story`, `release-notes`, `weekly-status`. Next: `decision`, `sweep` (pilot week 2), then `refine`, `sprint-summary`, `exec-update`, `meeting-prep`, `prd`, `roadmap-review`, `publish`. | Smallest set that covers capture, recall, backlog, shipping and reporting. A new skill is added after the same manual request has been typed three times. | 🔁 v0.2 built `decision`, `sweep`, `publish`, `team-status`, `connect-dots` (11 skills); remaining later: `refine`, `sprint-summary`, `exec-update`, `meeting-prep`, `prd`, `roadmap-review` |
 | D10 | **release-notes ships as a generic team version.** João merges his real skill + HTML template later (his template goes to `brain/preferences/release-notes.html`). | João chose "build a generic version" on 2026-10-13. | ✅ |
 | D11 | **Transcripts: manual drop first.** Teams Recap → download `.vtt`/`.docx` → save to `brain/inbox/` → `/ingest`. Optional: point `brain/inbox/` at a OneDrive-synced folder. Automation (Power Automate + Microsoft Graph, or an IT-approved Microsoft 365 MCP server) is a Phase 5 item with Dell IT. | Teams has no setting to auto-save transcripts to OneDrive; the Power Automate transcript trigger is reported unreliable and transcripts can be organizer-only; Graph/MCP needs Entra app registration + admin consent. Agents never post to Teams — they produce text to paste. | ✅ |
 | D12 | **Claim types** on every durable statement: `observation`, `interpretation`, `hypothesis`, `assumption`, `decision` + date + source. | A stakeholder's opinion must not become a "fact" by accident. Borrowed from the open-source PM second brain. | ✅ |
@@ -56,6 +56,19 @@ Status: ✅ decided · 🔁 superseded · ⏳ pending validation.
 | D15 | **No scheduler on a laptop:** weekly upkeep is a command the PM runs (Friday `/sweep`, once it exists). | Devin CLI has no built-in schedule; Devin web Automations could do it later if wanted. | ✅ |
 | D16 | Delivery of the first build: **zip with git history**; João pushes it to Dell GitLab himself. | The build environment cannot reach Dell's GitLab. Chosen by João on 2026-10-13. | ✅ |
 | D17 | MCP servers (Jira, Confluence, GitLab) are **placeholders** in `.devin/mcp_config.json`; real endpoints/auth go in `.devin/mcp_config.local.json` (git-ignored) or env vars. `.devin/config.json` holds only permissions. | Exact Dell endpoints and whether they work from the CLI are unknown (see Q1). No secrets in the shared repo. Devin CLI v3000.3+ reads MCP servers from the dedicated `mcp_config*.json` files (https://docs.devin.ai/cli/extensibility/mcp/configuration). | ⏳ |
+| D18 | **Roles: `pm` and `manager`, same repo and install.** `owner.role` in `brain.yaml` only changes defaults; no skill is hard-blocked. The manager has his own private brain too. | João (2026-10-19): each PM has a brain; the manager has access to a summary of all of them *and* his own brain. One codebase is easier to maintain. | ✅ |
+| D19 | **Team hub = separate GitLab repo `pm-team-hub`** holding only members, product cards, weekly digests and optional connect-dots reports. | Keeps private brains private; gives the manager one place to read; works with plain git. | ✅ |
+| D20 | **Hub audience: all PMs + manager.** | Chosen by João; PMs spotting overlaps themselves is a feature. | ✅ |
+| D21 | **Digest + product card schemas** with `topics`, `building`, `reusable`, `needs` as the matching signals (see `docs/DESIGN-v0.2.md` §4). | `/connect-dots` needs structured fields to find overlap/reuse/combination reliably. | ✅ |
+| D22 | **Privacy rule:** a digest is a summary written from the brain, never a copy: no transcripts/quotes, no people notes or attributed opinions, nothing marked `share: private`. | João: "my manager won't be able to see everything… and I don't want him to", but needs a consultable summary. | ✅ |
+| D23 | **Publishing is weekly and PM-approved** (`/publish`, Friday after `/sweep`); exact text previewed; push always asks. | Chosen by João. | ✅ |
+| D24 | **Front matter v2:** `topics`, `people`, `status`, `supersedes`/`superseded_by`, `valid_from`, `share`. | Enables grouping, versioning of beliefs, privacy filtering and metadata search. | ✅ |
+| D25 | **`/sweep` is the "dreaming" pass:** merge duplicates, mark contradicted notes superseded, flag stale, promote repeated observations, rebuild topic hubs/index; one diff, approved; never deletes. | João asked for dreaming; mirrors agent-memory consolidation, with a human gate for product decisions. | ✅ |
+| D26 | **Versioned brain:** `/onboard` runs `git init` in `brain/`; every writing skill ends with a brain commit. | Undo any agent change; answer "what did we believe in August?". | ✅ |
+| D27 | **Topic hubs + product index** as derived pages, updated by `/ingest`, rebuilt by `/sweep`. | Grouping across meetings; faster, cheaper `/ask`. | ✅ |
+| D28 | **`scripts/brain_search.py`** (stdlib): front-matter filters + keyword ranking; single retrieval entry point for all skills, works on the hub too. | "RAG with metadata" without infra; token-efficient. | ✅ |
+| D29 | **Batch `/ingest` with one consolidated approval; new `/decision`** with supersede check. | Fast backfill on day one; decisions logged without a meeting. | ✅ |
+| D30 | **Vector search still deferred**, pluggable behind `brain_search.py`. Revisit on eval misses from wording, ~1,000 notes, and Dell guidance on embeddings. | Small brains don't need it; embeddings raise a data-handling question at Dell. | ✅ |
 
 ## 4. Open questions
 
@@ -67,7 +80,11 @@ Status: ✅ decided · 🔁 superseded · ⏳ pending validation.
 - **Q4:** Which other roles among the ~25 people need their own skill packs (engineering, design, analysts), and who
   co-maintains them?
 - **Q5:** Should `brain/` be backed up to a private GitLab project by default?
-- **Q6:** Would João's manager value a read-only portfolio view rolling up all PMs' weekly statuses?
+- ~~**Q6:** Would João's manager value a read-only portfolio view rolling up all PMs' weekly statuses?~~ Answered
+  2026-10-19: yes — João wants it, plus cross-PM "connect the dots" (D18–D23).
+- **Q8 (team layer):** Who creates and owns the `pm-team-hub` GitLab repo, and does the manager agree to the
+  weekly-digest rhythm? Can all PMs get write access to it?
+- **Q9:** Are weekly digests themselves subject to Dell data rules (same as Q3), e.g. may they mention customer names?
 - **Q7:** Dell's preferred user-story format (fields, acceptance-criteria style, labels) — the MVP uses a generic
   "As a / I want / so that" + Given/When/Then template until João supplies Dell's.
 
@@ -114,25 +131,20 @@ Status: ✅ decided · 🔁 superseded · ⏳ pending validation.
 | 4 · Share with PMs | Wave 1 Dec 7–18 (2 PMs) · Wave 2 Jan 11–22, 2027 (3 PMs) | Each PM onboarded in a 30-min pairing; monthly agents sync set |
 | 5 · Open to the team | Feb 1–26, 2027 | Role packs (pm / engineering / design), plugins as install path tested, `CONTRIBUTING.md`, transcript automation decided with IT |
 
-## 7. Repo map (what the first build contains)
+## 7. Repo map
+
+v0.1 map superseded. Current structure: `docs/DESIGN-v0.2.md` §3 (team hub) and §9 (skills), `CONVENTIONS.md`
+(brain folders), `AGENTS.md` (roles and routing). Quick view:
 
 ```
 pm-agents/
-├── AGENTS.md                  # router: the team, which skill for what, brain rules
-├── README.md                  # 15-minute quick start
-├── CONVENTIONS.md             # claim types, naming, front matter, linking, approval rules
-├── CHANGELOG.md
-├── .gitignore                 # ignores brain/ and local config
-├── .devin/                    # config.json (permissions), mcp_config.json (MCP placeholders), README.md
-├── .agents/skills/
-│   ├── onboard/ ingest/ ask/              # Brain Keeper
-│   ├── user-story/                        # Backlog Writer
-│   ├── release-notes/                     # Release Manager (generic team version)
-│   └── weekly-status/                     # Reporter
-├── templates/                 # team defaults + brain skeleton copied by /onboard
-├── evals/                     # scenarios + fictional fixtures
-├── scripts/validate.py        # checks skills/front matter/links
-└── docs/HANDOFF.md            # this file
+├── AGENTS.md  README.md  CONVENTIONS.md  CHANGELOG.md
+├── .agents/skills/   onboard ingest ask decision sweep · user-story · release-notes · weekly-status publish · team-status connect-dots
+├── .devin/           config.json (permissions) · mcp_config.json (MCP placeholders) · README.md
+├── templates/        notes, digest, product card, topic hub, product index, release-notes.html, brain/ skeleton, team-hub/ bootstrap
+├── scripts/          validate.py · brain_search.py
+├── evals/            scenarios.md · scenarios-memory.md · scenarios-team.md · fixtures/
+└── docs/             HANDOFF.md (this file) · DESIGN-v0.2.md
 ```
 
 ## 8. How to continue in another environment

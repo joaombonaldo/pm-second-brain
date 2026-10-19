@@ -9,12 +9,28 @@ Everything in `fixtures/` is **fictional** ("Acme Listings Optimizer"). It is no
 
 | File | What it is |
 |------|------------|
-| [scenarios.md](scenarios.md) | 10 scenarios: input, skill, expected behaviour, pass criteria |
-| `fixtures/brain.yaml` | Settings for the fictional product |
+| [scenarios.md](scenarios.md) | 10 core scenarios (v0.1 skills): input, skill, expected behaviour, pass criteria |
+| [scenarios-memory.md](scenarios-memory.md) | Memory scenarios (v0.2): `/sweep`, `/decision`, batch `/ingest`, superseded history in `/ask` |
+| [scenarios-team.md](scenarios-team.md) | Team scenarios (v0.2): `/publish` privacy, `/team-status`, `/connect-dots`, hub not configured |
+| `fixtures/brain.yaml` | Settings for the fictional product (core scenarios) |
 | `fixtures/2026-10-06-bulk-edit-sync.vtt` | Teams-style transcript: 51 cues, 3 speakers, 2 decisions, 3 action items, 1 open question |
 | `fixtures/sprint-24-stories.csv` | Jira-style export of 8 done stories for v2.4.0 (2 internal) |
+| `fixtures/memory/` | Ready-made brain with duplicates, contradictions, a stale note, plus 2 inbox transcripts |
+| `fixtures/team-hub/`, `fixtures/team-hub-unrelated/`, `fixtures/team-brain/` | Fictional hubs and a brain with private canaries |
 
-## How to run (about 30 minutes for all 10)
+## Automated check: brain_search self-test
+
+Before the manual scenarios, run the retrieval self-test (uses `fixtures/memory/`; takes a second):
+
+```bash
+python3 scripts/brain_search.py --selftest
+```
+
+Every line must say PASS and the last line `selftest: OK`.
+
+## How to run the core scenarios (about 30 minutes for all 10)
+
+The memory and team scenario files have their own setup steps at the top.
 
 Never run evals against your real brain. Use a separate scratch clone.
 
@@ -26,9 +42,9 @@ Never run evals against your real brain. Use a separate scratch clone.
    ```
 
 2. **Build the scratch brain**: start `devin`, run `/onboard` and answer with the fixture values
-   (name Ana Souza; product "Acme Listings Optimizer", slug `acme-listings-optimizer`; Jira ALO; Confluence ALO;
+   (name Ana Souza; role pm; product "Acme Listings Optimizer", slug `acme-listings-optimizer`; Jira ALO; Confluence ALO;
    stakeholders "Marco Lima — Engineering Manager" and "Priya Nair — Product Designer"; persona from
-   `fixtures/brain.yaml`). This is scenario 1. Then compare `brain/brain.yaml` with `evals/fixtures/brain.yaml`.
+   `fixtures/brain.yaml`; skip the team hub). This is scenario 1. Then compare `brain/brain.yaml` with `evals/fixtures/brain.yaml`.
 3. **Run the scenarios in order** (some build on earlier ones). For each: set up as described, type the input, and
    check the result against the pass criteria. Mark PASS / FAIL and note why.
 4. **Disconnect Jira MCP** (or run before Q1 is solved) for scenarios marked "no MCP" so the fallback path is tested.
