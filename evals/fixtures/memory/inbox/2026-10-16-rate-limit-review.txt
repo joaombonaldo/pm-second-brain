@@ -1,0 +1,10 @@
+Rate limit review — 2026-10-16
+Attendees: Ana Souza, Marco Lima
+
+Marco: I ran the sandbox spike. We sustained 60 requests per second for ten minutes with no throttling.
+Marco: At that rate a batch of 250 finishes in about five seconds including retries.
+Ana: Then 100 is too conservative. Let's raise the cap to 250 listings per batch starting in 2.5. Decided.
+Marco: Fine by me. I'll update the API client config.
+Ana: Marco, can you have the config change ready by October 23?
+Marco: Yes.
+Ana: Open point: do we tell beta sellers before 2.5 or just ship it? Let's think about it.

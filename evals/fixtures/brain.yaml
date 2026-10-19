@@ -1,7 +1,7 @@
 # Fixture brain.yaml for evals — FICTIONAL product and people. Not Dell data.
 owner:
   name: Ana Souza
-  role: Product Manager
+  role: pm                  # pm | manager (D18)
 
 products:
   - name: Acme Listings Optimizer
@@ -17,6 +17,11 @@ stakeholders:
   - name: Priya Nair
     role: Product Designer
     file: stakeholders/priya-nair.md
+
+# Team hub (optional, D19). Off for the v0.1 scenarios; see scenarios-team.md and fixtures/team-brain/.
+team_hub:
+  path: ""                  # relative to the pm-agents folder, e.g. ../pm-team-hub; empty = team features off
+  person_slug: ""           # e.g. ana-souza
 
 defaults:
   timezone: America/Sao_Paulo

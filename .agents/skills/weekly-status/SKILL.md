@@ -45,6 +45,10 @@ Give stakeholders an honest, sourced picture of the week in a few minutes of the
 6. **Save** to `brain/products/<slug>/status/YYYY-Www.md` (ISO week of the period's end). If it exists, show a diff
    and ask before replacing it. Put the short version at the end of the file under "Short version".
 7. **Show** both versions in the chat.
+8. **Save (D26).** `git -C brain add -A && git -C brain commit -m "weekly-status: <slug> YYYY-Www"`. If git is
+   missing or fails, warn once and carry on.
+9. **Suggest next.** If `team_hub.path` is set, suggest `/publish` (Friday). If `owner.role` is `manager`, also
+   suggest `/team-status` for the team roll-up (D18).
 
 ## Reads
 

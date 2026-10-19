@@ -1,11 +1,12 @@
 # brain.yaml — your second brain's settings.
 # Created by /onboard. Lives in brain/ (git-ignored): it never reaches the shared repo.
+# brain/ is its own private git repo (D26): every skill that writes here makes one commit.
 # Edit by hand any time, or re-run /onboard to add a product.
 
 # Who you are
 owner:
   name: ""                  # e.g. Ana Souza
-  role: Product Manager
+  role: pm                  # pm | manager — changes skill defaults only (D18)
 
 # Your products (D14). Add one entry per product; /onboard does this for you.
 products: []
@@ -21,6 +22,11 @@ stakeholders: []
 #  - name: Marco Lima
 #    role: Engineering Manager
 #    file: stakeholders/marco-lima.md
+
+# Team hub (optional, D19). Local clone of the shared pm-team-hub repo. Empty path = team features off.
+team_hub:
+  path: ""                  # relative to the pm-agents folder (not brain/), e.g. ../pm-team-hub
+  person_slug: ""           # your file name in the hub, e.g. ana-souza (members/ana-souza.md)
 
 # Defaults used by skills
 defaults:

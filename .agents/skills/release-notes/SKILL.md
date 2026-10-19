@@ -53,6 +53,8 @@ Explain what shipped in a way the target user cares about, and save it as a read
    `sprint-42.html`). If the file exists, ask before overwriting; otherwise save as `<version>-v2.html`.
 9. **Show** a markdown preview of the content (intro + themes + items), then the list of **skipped items** with the
    reason for each, so the user can pull any back in.
+10. **Save (D26).** `git -C brain add -A && git -C brain commit -m "release-notes: <version>"`. If git is missing or
+    fails, warn once and carry on.
 
 ## Reads
 

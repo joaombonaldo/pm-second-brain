@@ -4,6 +4,10 @@ title: <Meeting title>
 date: <YYYY-MM-DD>
 product: <product-slug>
 attendees: [<Name>, <Name>]
+people: [<firstname-lastname>]       # slugs of people mentioned
+topics: [<topic>]                    # 1-4 kebab-case topics; reuse existing ones (see topics/)
+share: private                       # meetings are private by default
+status: active
 source_file: <inbox/processed/file.vtt or "pasted by user, YYYY-MM-DD">
 tags: []
 ---
@@ -23,6 +27,10 @@ tags: []
 ### <Topic>
 
 - <Key point. Attribute opinions: "Marco thinks…">
+
+<!-- Anything that must never leave the brain (even in a digest) goes in a private block: -->
+<!-- private -->
+<!-- /private -->
 
 ## Decision candidates
 

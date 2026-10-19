@@ -6,7 +6,12 @@ product: <product-slug>
 status: proposed        # proposed | accepted | superseded
 decided_by: <Name>
 source: <meetings/YYYY/YYYY-MM-DD-slug.md>
-supersedes:             # path to the older decision, if any
+topics: [<topic>]       # reuse existing topics
+people: [<firstname-lastname>]
+share: team             # decisions are shareable by default; use private if not
+supersedes:             # older decision this replaces, e.g. 2026-09-01-slug.md
+superseded_by:          # filled in on THIS file if a newer decision replaces it later
+valid_from: <YYYY-MM-DD>
 ---
 
 # <Short decision title>
@@ -32,6 +37,10 @@ supersedes:             # path to the older decision, if any
 
 - [assumption] <...>
 - <Open question>
+
+## History
+
+- <If this supersedes an older decision: "Replaces [old title](<YYYY-MM-DD-slug.md>) — why it changed.">
 
 ## Sources
 

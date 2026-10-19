@@ -1,0 +1,8 @@
+Design review — 2026-10-17
+Attendees: Ana Souza, Priya Nair
+
+Priya: Here are the updated mockups. The progress indicator shows listings done out of the total.
+Priya: For failures, I'd add a summary at the end listing each failed listing and the reason.
+Ana: Good. Let's make the failure summary downloadable as CSV so sellers can fix and retry. Decided.
+Priya: I think sellers will also want to filter the summary by error type, but that can wait.
+Ana: Agreed, not for 2.4. Priya, please hand off final specs by October 21.

@@ -15,10 +15,11 @@ Paths below are relative to `brain/products/acme-listings-optimizer/` unless the
 - **Expected behaviour:** Copies `templates/brain/` into `brain/`, asks the questions one at a time, writes
   `brain.yaml`, two stakeholder files, `product/overview.md` and `brain/preferences/persona.md`.
 - **Pass criteria:**
-  - Asked no more than ~6 questions, one per message.
-  - `brain/brain.yaml` matches the fixture's product, Jira key, Confluence space and stakeholders.
+  - Asked no more than 7 questions, one per message (team hub question skippable).
+  - `brain/brain.yaml` matches the fixture's role, product, Jira key, Confluence space and stakeholders.
   - `brain/stakeholders/marco-lima.md` and `priya-nair.md` exist with front matter.
-  - All product subfolders exist (`product/ … sweeps/`, `backlog/drafts/`).
+  - All product subfolders exist (`product/ … sweeps/`, `topics/`, `backlog/drafts/`) plus `index.md`; `brain/.git`
+    exists with one `onboard:` commit (or a one-line "not versioned" warning).
   - Ends with the 3-line summary.
 
 ## 2. Re-run onboard: no overwrite, add a product

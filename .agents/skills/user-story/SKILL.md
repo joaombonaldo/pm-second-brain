@@ -53,6 +53,8 @@ brain; Jira is touched only after the user confirms exactly what will be created
    - Updating an existing issue follows the same rule: show the before/after, wait for "yes".
    - If the Jira MCP tool is missing or fails: say so in one line and output each story as copy-paste-ready text
      (Summary / Description / Acceptance criteria blocks) so the user can paste it into Jira.
+9. **Save (D26).** `git -C brain add -A && git -C brain commit -m "user-story: <N> drafts (<short topic>)"`. If git
+   is missing or fails, warn once and carry on.
 
 ## Reads
 

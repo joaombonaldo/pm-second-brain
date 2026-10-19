@@ -4,6 +4,8 @@ name: <First Last>
 role: <Role>
 team: <Team>
 products: [<product-slug>]
+people: [<firstname-lastname>]
+share: private          # stakeholder notes are never published
 updated: <YYYY-MM-DD>
 ---
 
